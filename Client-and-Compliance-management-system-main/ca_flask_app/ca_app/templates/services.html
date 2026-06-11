@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h4>Services</h4>
+  <div class="d-flex gap-2">
+    <a href="{{ url_for('assign_service') }}" class="btn btn-outline-primary btn-sm">
+      <i class="bi bi-link"></i> Assign to Client
+    </a>
+    <a href="{{ url_for('add_service') }}" class="btn btn-primary btn-sm">
+      <i class="bi bi-plus"></i> Add Service
+    </a>
+  </div>
+</div>
+
+<div class="card">
+  <table class="table table-hover mb-0">
+    <thead class="table-light">
+      <tr><th>#</th><th>Service Name</th><th>Fees</th></tr>
+    </thead>
+    <tbody>
+      {% for s in services %}
+      <tr>
+        <td>{{ s.Service_ID }}</td>
+        <td>{{ s.Service_Name }}</td>
+        <td>₹{{ "%.2f"|format(s.Fees) }}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="3" class="text-center text-muted">No services.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

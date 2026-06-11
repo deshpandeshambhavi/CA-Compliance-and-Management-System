@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+<a href="{{ url_for('clients') }}" class="btn btn-sm btn-outline-secondary mb-3">
+  <i class="bi bi-arrow-left"></i> Back
+</a>
+
+<div class="card p-4 mb-4">
+  <h5>{{ client.Name }}</h5>
+  <div class="row text-muted" style="font-size:0.9rem">
+    <div class="col-md-3"><i class="bi bi-card-text"></i> PAN: <strong>{{ client.PAN }}</strong></div>
+    <div class="col-md-3"><i class="bi bi-phone"></i> {{ client.Phone }}</div>
+    <div class="col-md-4"><i class="bi bi-envelope"></i> {{ client.Email }}</div>
+  </div>
+</div>
+
+<div class="row g-3">
+  <!-- Services -->
+  <div class="col-md-6">
+    <div class="card p-3">
+      <h6>Services Availed</h6>
+      <table class="table table-sm">
+        <thead class="table-light"><tr><th>Service</th><th>Fees</th><th>Date</th></tr></thead>
+        <tbody>
+          {% for s in services %}
+          <tr><td>{{ s.Service_Name }}</td><td>₹{{ s.Fees }}</td><td>{{ s.Usage_Date }}</td></tr>
+          {% else %}
+          <tr><td colspan="3" class="text-muted">None</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Bills -->
+  <div class="col-md-6">
+    <div class="card p-3">
+      <h6>Billing History</h6>
+      <table class="table table-sm">
+        <thead class="table-light"><tr><th>Date</th><th>Amount</th><th>Status</th></tr></thead>
+        <tbody>
+          {% for b in bills %}
+          <tr>
+            <td>{{ b.Bill_Date }}</td>
+            <td>₹{{ b.Amount }}</td>
+            <td><span class="badge badge-{{ b.Payment_Status.lower() }}">{{ b.Payment_Status }}</span></td>
+          </tr>
+          {% else %}
+          <tr><td colspan="3" class="text-muted">No bills</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Compliance -->
+  <div class="col-12">
+    <div class="card p-3">
+      <h6>Compliance Records</h6>
+      <table class="table table-sm">
+        <thead class="table-light"><tr><th>Type</th><th>Regulation</th><th>Due Date</th><th>Status</th></tr></thead>
+        <tbody>
+          {% for co in compliance %}
+          <tr>
+            <td>{{ co.Type }}</td>
+            <td>{{ co.Reg_Name }}</td>
+            <td>{{ co.Due_Date }}</td>
+            <td><span class="badge badge-{{ co.Status.lower() }}">{{ co.Status }}</span></td>
+          </tr>
+          {% else %}
+          <tr><td colspan="4" class="text-muted">No records</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

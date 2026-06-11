@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block content %}
+<h4 class="mb-4">Reports</h4>
+
+<div class="row g-3">
+  <!-- Revenue per service -->
+  <div class="col-md-6">
+    <div class="card p-3">
+      <h6>Revenue per Service</h6>
+      <table class="table table-sm">
+        <thead class="table-light">
+          <tr><th>Service</th><th>Times Used</th><th>Total Revenue</th></tr>
+        </thead>
+        <tbody>
+          {% for r in revenue %}
+          <tr>
+            <td>{{ r.Service_Name }}</td>
+            <td>{{ r.Times_Used }}</td>
+            <td>₹{{ "%.2f"|format(r.Total_Revenue) }}</td>
+          </tr>
+          {% else %}
+          <tr><td colspan="3" class="text-muted">No data.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Multi-service clients -->
+  <div class="col-md-6">
+    <div class="card p-3">
+      <h6>Clients with Multiple Services</h6>
+      <table class="table table-sm">
+        <thead class="table-light">
+          <tr><th>Client</th><th>Services Count</th></tr>
+        </thead>
+        <tbody>
+          {% for row in multi_service_clients %}
+          <tr>
+            <td>{{ row.Name }}</td>
+            <td>{{ row.Service_Count }}</td>
+          </tr>
+          {% else %}
+          <tr><td colspan="2" class="text-muted">No data.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Overdue compliance -->
+  <div class="col-12">
+    <div class="card p-3">
+      <h6>Overdue Compliances</h6>
+      <table class="table table-sm">
+        <thead class="table-light">
+          <tr><th>Client</th><th>Compliance Type</th><th>Due Date</th></tr>
+        </thead>
+        <tbody>
+          {% for row in overdue_compliance %}
+          <tr>
+            <td>{{ row.Client_Name }}</td>
+            <td>{{ row.Type }}</td>
+            <td class="text-danger">{{ row.Due_Date }}</td>
+          </tr>
+          {% else %}
+          <tr><td colspan="3" class="text-success">No overdue compliances.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

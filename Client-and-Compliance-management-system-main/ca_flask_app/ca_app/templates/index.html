@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+<h4 class="mb-4">Dashboard</h4>
+
+<div class="row g-3 mb-4">
+  <div class="col-md-3">
+    <div class="stat-card" style="background:#4f8ef7">
+      <div style="font-size:2rem;font-weight:700">{{ stats.clients }}</div>
+      <div>Total Clients</div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="stat-card" style="background:#10b981">
+      <div style="font-size:2rem;font-weight:700">{{ stats.services }}</div>
+      <div>Services Offered</div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="stat-card" style="background:#f59e0b">
+      <div style="font-size:2rem;font-weight:700">{{ stats.unpaid }}</div>
+      <div>Unpaid Bills</div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="stat-card" style="background:#ef4444">
+      <div style="font-size:2rem;font-weight:700">{{ stats.overdue }}</div>
+      <div>Overdue Compliances</div>
+    </div>
+  </div>
+</div>
+
+<div class="card p-4">
+  <h6 class="mb-3">Upcoming Compliance Due Dates</h6>
+  <table class="table table-hover">
+    <thead class="table-light">
+      <tr><th>Client</th><th>Type</th><th>Status</th><th>Due Date</th></tr>
+    </thead>
+    <tbody>
+      {% for row in recent_compliance %}
+      <tr>
+        <td>{{ row.Client_Name }}</td>
+        <td>{{ row.Type }}</td>
+        <td><span class="badge badge-{{ row.Status.lower() }}">{{ row.Status }}</span></td>
+        <td>{{ row.Due_Date }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
