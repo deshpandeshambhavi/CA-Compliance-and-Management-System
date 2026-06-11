@@ -326,7 +326,11 @@ This project demonstrates:
 
 ---
 
-## 👨‍💻 Author
+## 👤 Author
+
+**Shambhavi Deshpande**  
+GitHub: @deshpandeshambhavi (https://github.com/deshpandeshambhavi)  
+Email: 25shambhavideshpande@gmail.com
 
 Developed as an academic and practical full-stack database management project to simplify client, billing, and compliance tracking for accounting professionals.
 
